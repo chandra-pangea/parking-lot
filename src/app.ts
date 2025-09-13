@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
 import { setParkingRoutes } from './routes/parkingRoutes';
+import { connectDB } from './utils/db';
+import setVehicleRoutes from './routes/vehicleRoutes';
 
 dotenv.config();
 
@@ -11,20 +12,12 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 
-// MongoDB connection
-const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI || '', {});
-        console.log('MongoDB connected');
-    } catch (error) {
-        console.error('MongoDB connection error:', error);
-        process.exit(1);
-    }
-};
+// Connect to MongoDB
 connectDB();
 
 // Set up routes
 setParkingRoutes(app);
+setVehicleRoutes(app);
 
 // Start the server
 if (process.env.NODE_ENV !== 'test') {

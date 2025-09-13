@@ -8,5 +8,5 @@ export const setParkingRoutes = (app: Express) => {
     router.post('/check-in', parkingController.checkIn);
     router.post('/check-out/:transactionId', parkingController.checkOut);
     router.get('/availability', parkingController.getAvailableSpots);
-    app.use('/api/parking', router);
+    app.use('/api/v1/parking', router);
 };

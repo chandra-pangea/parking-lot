@@ -65,15 +65,3 @@ export class ParkingController {
         }
     }
 }
-
-// Router setup
-const router = Router();
-const controller = new ParkingController();
-
-router.post('/check-in', controller.checkIn);
-router.post('/check-out/:transactionId', controller.checkOut);
-router.get('/availability', controller.getAvailableSpots);
-
-export const setParkingRoutes = (app: any) => {
-    app.use('/api/parking', router);
-};
